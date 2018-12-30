@@ -32,3 +32,24 @@ public:
         }
     }
 };
+
+//alternatively use a switch statement
+class SecondSolution {
+public:
+     bool isValid(string s) {
+        stack<char> open;
+        for (char& c : s) {
+            switch (c) {
+                case '(': 
+                case '{': 
+                case '[': open.push(c); break;
+                case ')': if (open.empty() || open.top()!='(') return false; else open.pop(); break;
+                case '}': if (open.empty() || open.top()!='{') return false; else open.pop(); break;
+                case ']': if (open.empty() || open.top()!='[') return false; else open.pop(); break;
+                default: ; // pass
+            }
+        }
+        return open.empty() ;
+    }
+};
+
