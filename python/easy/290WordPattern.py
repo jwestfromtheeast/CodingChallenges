@@ -1,21 +1,21 @@
 class Solution:
-    # Idea: Store maps that cross-reference one another (one converts the pattern string to actual string, and vice versa)
+    # Idea: Have a map that records which pattern corresponds to which string
+    # Then, have a set to record strings visited so far, in case you have not seen a pattern but have seen a string (would be False)
     # Complexity: Time O(n) Space O(n)
     def wordPattern(self, pattern: str, str: str) -> bool:
-        patstr = {}
-        strpat = {}
+        patToStr = {}
+        strVisited = set()
         split = str.split(' ')
         if len(pattern) != len(split):
             return False
         for i in range(len(split)):
-            if pattern[i] in patstr:
-                if patstr[pattern[i]] != split[i]:
+            if pattern[i] in patToStr:
+                if patToStr[pattern[i]] != split[i]:
                     return False
             else:
-                if split[i] in strpat:
-                    if strpat[split[i]] != pattern[i]:
-                        return False
+                if split[i] in strVisited:
+                    return False
                 else:
-                    patstr[pattern[i]] = split[i]
-                    strpat[split[i]] = pattern[i]
+                    patToStr[pattern[i]] = split[i]
+                    strVisited.add(split[i])
         return True
