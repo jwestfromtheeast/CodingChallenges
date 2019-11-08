@@ -14,21 +14,18 @@ class Solution:
             return max(nums[0], nums[1])
         money = [0 for i in range(L)]
         money[0] = nums[0]
-        money[1] = max(nums[0], nums[1])
-        for i in range(2, L):
+        for i in range(1, L):
             money[i] = max(money[i - 2] + nums[i], money[i - 1])
         return money[L - 1]
     
     def rob(self, nums: List[int]) -> int:
         if not nums:
             return 0
-        L = len(nums)
-        if L == 1:
+        if len(nums) == 1:
             return nums[0]
-        if L == 2:
+        if len(nums) == 2:
             return max(nums[0], nums[1])
-        last = nums[0]
-        curr = max(nums[0], nums[1])
-        for i in range(2, L):
-            curr, last = max(last + nums[i], curr), curr
+        prev, curr = 0, nums[0]
+        for i in range(1, len(nums)):
+            prev, curr = curr, max(prev + nums[i], curr)
         return curr
