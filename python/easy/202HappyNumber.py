@@ -18,9 +18,8 @@ class Solution:
     def isHappyPythonic(self, n: int) -> bool:
         prev = set()
         while n != 1:
-            next_n = sum([int(i) ** 2 for i in str(n)])
-            if next_n in prev:
+            if n in prev:
                 return False
-            prev.add(next_n)
-            n = next_n
+            prev.add(n)
+            n = sum([int(c) ** 2 for c in str(n)])
         return True
