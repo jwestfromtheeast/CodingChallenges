@@ -35,7 +35,7 @@ class Trie:
             if not c in curr.adj:
                 return False
             curr = curr.adj[c]
-        return True if curr.isWord else False
+        return curr.isWord
 
     def startsWith(self, prefix: str) -> bool:
         """
